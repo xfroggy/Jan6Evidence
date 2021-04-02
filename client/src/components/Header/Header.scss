@@ -1,0 +1,22 @@
+@import '../../partials/partials';
+
+.hero {
+    @include flex-row;
+    align-items: center;
+    background-image: linear-gradient(rgba(51, 51, 51, 0.5), rgba(0, 0, 0, 0.5)), url("https://gazettereview.com/wp-content/uploads/2016/07/crime-scene-header.jpg");
+    background-size: cover;
+    width: 100%;
+    min-height: 11.438rem;
+    height: 40vw;
+    @include tablet {
+      min-height: 25rem;
+    }
+    @include desktop {
+      min-height: 41.875rem;
+    }
+    &__title {
+      @include h1-hero;
+      @include side-margin;
+      color: white;
+    }
+  }
