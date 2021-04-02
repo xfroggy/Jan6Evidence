@@ -24,13 +24,13 @@ const useStyles = makeStyles({
 });
 
 export default function SimpleCard({ name, count }) {
-  console.log("Working?");
+  console.log('Working?');
 
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
   return (
-    <Card className={classes.root} >
+    <Card className={classes.root}>
       <CardContent>
         <Typography
           className={classes.title}
@@ -48,7 +48,6 @@ export default function SimpleCard({ name, count }) {
         <Typography variant="body2" component="p">
           {count} times
           <br />
-
         </Typography>
       </CardContent>
       <CardActions>
