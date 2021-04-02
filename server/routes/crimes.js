@@ -13,7 +13,7 @@ router.get('/internal', (req, res) => {
       return res.json();
     })
     .then((data) => {
-      fs.writeFile(path + '/jan6.json', JSON.stringify(data), () => { });
+      fs.writeFile(path + '/jan6.json', JSON.stringify(data), () => {});
     })
     .catch((err) => {
       console.log(err);
@@ -29,20 +29,19 @@ router.get('/', (req, res) => {
     }
     data = JSON.parse(data);
     const arr = [];
-    const all = {};
+    const all = [];
     data.forEach((evidence) => {
       let suspects = evidence.suspectTags;
+      // console.log(suspects);
       suspects.forEach((suspect) => {
         arr.push(suspect);
       });
-
     });
 
     //count = myArray.filter(x => x == searchValue).length;
     // arr.forEach((key) => {
     //   all[key] = (all[key] || 0) + 1;
     // });
-
 
     // data.forEach((evidence) => {
     //   let suspects = evidence.suspectTags;
@@ -54,8 +53,6 @@ router.get('/', (req, res) => {
     // arr.forEach((key) => {
     //   all[key] = (all[key] || 0) + 1;
     // });
-
-
 
     const sortable = Object.entries(all)
       .sort(([, a], [, b]) => b - a)
@@ -74,11 +71,7 @@ router.get('/', (req, res) => {
     //   console.log(suspect)
     // }}
     //res.status(201).send(sortable);
-
-
   });
-
-
 });
 
 // Reading File + Filter or Other Sorting.
