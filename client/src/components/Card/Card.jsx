@@ -23,30 +23,32 @@ const useStyles = makeStyles({
   }
 });
 
-export default function SimpleCard() {
+export default function SimpleCard({ name, count }) {
+  console.log("Working?");
+
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} >
       <CardContent>
         <Typography
           className={classes.title}
           color="textSecondary"
           gutterBottom
         >
-          Word of the Day
+          Suspect
         </Typography>
         <Typography variant="h5" component="h2">
-          be{bull}nev{bull}o{bull}lent
+          {name}
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
-          adjective
+          Caught on Video
         </Typography>
         <Typography variant="body2" component="p">
-          well meaning and kindly.
+          {count} times
           <br />
-          {'"a benevolent smile"'}
+
         </Typography>
       </CardContent>
       <CardActions>
