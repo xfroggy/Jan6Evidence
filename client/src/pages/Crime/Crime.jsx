@@ -38,7 +38,6 @@ const Crime = () => {
                 return <SimpleCard name={criminal.name} count={criminal.count} />
               })}
             </article>
-            <div className="crime__list"></div>
           </section>
         </>
       )
