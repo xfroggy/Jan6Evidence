@@ -13,7 +13,7 @@ router.get('/internal', (req, res) => {
       return res.json();
     })
     .then((data) => {
-      fs.writeFile(path + '/jan6.json', JSON.stringify(data), () => {});
+      fs.writeFile(path + '/jan6.json', JSON.stringify(data), () => { });
     })
     .catch((err) => {
       console.log(err);
@@ -35,16 +35,50 @@ router.get('/', (req, res) => {
       suspects.forEach((suspect) => {
         arr.push(suspect);
       });
-      // console.log(suspects);
+
     });
-    arr.forEach((key) => {
-      all[key] = (all[key] || 0) + 1;
-    });
+
+    //count = myArray.filter(x => x == searchValue).length;
+    // arr.forEach((key) => {
+    //   all[key] = (all[key] || 0) + 1;
+    // });
+
+
+    // data.forEach((evidence) => {
+    //   let suspects = evidence.suspectTags;
+    //   suspects.forEach((suspect) => {
+    //     arr.push(suspect);
+    //   });
+    //   // console.log(suspects);
+    // });
+    // arr.forEach((key) => {
+    //   all[key] = (all[key] || 0) + 1;
+    // });
+
+
+
     const sortable = Object.entries(all)
       .sort(([, a], [, b]) => b - a)
       .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
-    console.log(sortable);
+
+    let suspectsArr = Object.values(sortable);
+
+    // let suspectsArr = Object.keys(sortable).map((key) => {
+    //   let suspectObj = { sortable[key]: sortable[key] };
+    //   return suspectObj;
+    // }
+    // );
+
+    console.log(suspectsArr);
+    // for (const suspect in sortable) {
+    //   console.log(suspect)
+    // }}
+    //res.status(201).send(sortable);
+
+
   });
+
+
 });
 
 // Reading File + Filter or Other Sorting.
