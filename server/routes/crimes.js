@@ -29,7 +29,7 @@ router.get('/', (req, res) => {
     }
     data = JSON.parse(data);
     const arr = [];
-    const all = [];
+    const all = {};
     data.forEach((evidence) => {
       let suspects = evidence.suspectTags;
       // console.log(suspects);
@@ -38,15 +38,28 @@ router.get('/', (req, res) => {
       });
       // console.log(arr);
     });
+
     arr.forEach((key) => {
       all[key] = (all[key] || 0) + 1;
     });
-    // console.log(all);
+
     const sortable = Object.entries(all)
       .sort(([, a], [, b]) => b - a)
       .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
-    console.log(sortable);
-    res.json(`<h1>${sortable.ThreePercentSneak}</h1>`);
+
+    const suspectObj = [];
+    let id = 0;
+    for (const suspect in sortable) {
+      let individualSuspectObj = {
+        id: ++id,
+        name: suspect,
+        count: sortable[suspect]
+      };
+      suspectObj.push(individualSuspectObj);
+    }
+
+    console.log(suspectObj[0]);
+    res.send(suspectObj);
   });
 });
 
