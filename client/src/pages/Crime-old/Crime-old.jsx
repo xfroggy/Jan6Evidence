@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import SimpleCard from '../../components/Card/Card';
 import axios from 'axios';
+import Header from '../../components/Header/Header';
+import CrimeList from '../../components/CrimeList/CrimeList';
+
+
 
 const Crime = () => {
   const [criminalList, setCriminalList] = useState();
@@ -30,16 +34,20 @@ const Crime = () => {
 
             <article className="cardContainer">
               {criminalList.map((criminal) => {
-                return (
-                  <SimpleCard name={criminal.name} count={criminal.count} />
-                );
+
+                return <SimpleCard name={criminal.name} count={criminal.count} />
               })}
             </article>
           </section>
         </>
-      )}
+      )
+      }
     </>
+
   );
+
 };
+
+
 
 export default Crime;
