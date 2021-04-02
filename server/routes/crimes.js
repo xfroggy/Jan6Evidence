@@ -29,21 +29,24 @@ router.get('/', (req, res) => {
     }
     data = JSON.parse(data);
     const arr = [];
-    const all = {};
+    const all = [];
     data.forEach((evidence) => {
       let suspects = evidence.suspectTags;
+      // console.log(suspects);
       suspects.forEach((suspect) => {
         arr.push(suspect);
       });
-      // console.log(suspects);
+      // console.log(arr);
     });
     arr.forEach((key) => {
       all[key] = (all[key] || 0) + 1;
     });
+    // console.log(all);
     const sortable = Object.entries(all)
       .sort(([, a], [, b]) => b - a)
-      .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
+      .reduce((r, [k, v]) => ({ ...r, [v]: k }), {});
     console.log(sortable);
+    res.json(`<h1>${JSON.stringify(sortable)}</h1>`);
   });
 });
 
