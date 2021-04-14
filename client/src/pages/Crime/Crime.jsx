@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import SimpleCard from '../../components/Card/Card';
 import axios from 'axios';
+import Header from '../../components/Header/Header';
+import './Crime.scss';
 
 const Crime = () => {
   const [criminalList, setCriminalList] = useState();
