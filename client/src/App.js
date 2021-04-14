@@ -7,7 +7,7 @@ import './App.css';
 function App() {
   return (
     <Router>
-      <Navbar />
+      {/* <Navbar /> */}
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/crime" component={Crime} />

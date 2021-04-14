@@ -13,7 +13,7 @@ router.get('/internal', (req, res) => {
       return res.json();
     })
     .then((data) => {
-      fs.writeFile(path + '/jan6.json', JSON.stringify(data), () => { });
+      fs.writeFile(path + '/jan6.json', JSON.stringify(data), () => {});
     })
     .catch((err) => {
       console.log(err);
@@ -36,18 +36,14 @@ router.get('/', (req, res) => {
       suspects.forEach((suspect) => {
         arr.push(suspect);
       });
+      // console.log(arr);
     });
-
-
     arr.forEach((key) => {
       all[key] = (all[key] || 0) + 1;
     });
-
-
     const sortable = Object.entries(all)
       .sort(([, a], [, b]) => b - a)
       .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
-
     const suspectObj = [];
     let id = 0;
     for (const suspect in sortable) {
@@ -55,32 +51,70 @@ router.get('/', (req, res) => {
         id: ++id,
         name: suspect,
         count: sortable[suspect]
-      }
-      suspectObj.push(individualSuspectObj)
-
+      };
+      suspectObj.push(individualSuspectObj);
     }
 
-    console.log(suspectObj[0]);
+    // console.log(suspectObj[0]);
     res.send(suspectObj);
-
-
-
   });
 });
 
-// Reading File + Filter or Other Sorting.
+router.get('/:name', (req, res) => {
+  suspectName = req.params.name;
+  // console.log(suspectName);
 
-fs.readFile(path + '/jan6.json', 'utf8', (err, data) => {
-  if (err) {
-    console.error(err);
-    return;
-  }
-  data = JSON.parse(data);
-  let neededData = data.filter(
-    (important) => important.suspectTags.length > 20
-  );
-  // console.log(neededData.length);
-  // console.log(neededData);
+  fs.readFile(path + '/jan6.json', 'utf8', (err, data) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    data = JSON.parse(data);
+    const vidArray = [];
+    // const all = {};
+    const videoList = [];
+    data.forEach((evidence) => {
+      let suspects = evidence.suspectTags;
+      // console.log(suspects);
+      suspects.forEach((suspect) => {
+        // vidArray.push(suspect);
+        // console.log(evidence._id);
+        // console.log(suspect);
+        // console.log(suspectName);
+        if (suspect == suspectName) {
+          videoList.push(evidence._id);
+          //   // console.log('matched!');
+        }
+      });
+      console.log(videoList);
+      let unique = [...new Set(videoList)];
+      // console.log(unique);
+    });
+  });
+
+  // fs.readFile(path + '/jan6.json', 'utf8', (err, data) => {
+  //   if (err) {
+  //     console.error(err);
+  //     return;
+  //   }
+  //   data = JSON.parse(data);
+  //   let neededData = data.find(
+  //     (important) => important.suspectTags.length > 20
+  //   );
 });
+
+// Reading File + Filter or Other Sorting.
+// fs.readFile(path + '/jan6.json', 'utf8', (err, data) => {
+//   if (err) {
+//     console.error(err);
+//     return;
+//   }
+//   data = JSON.parse(data);
+//   let neededData = data.filter(
+//     (important) => important.suspectTags.length > 20
+//   );
+// console.log(neededData.length);
+// console.log(neededData);
+// });
 
 module.exports = router;
